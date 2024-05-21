@@ -1,28 +1,77 @@
 <script setup>
-let listDatos = [{
+
+import { ref } from 'vue';
+
+
+let fechaInput = ref('')
+let pesoInput = ref('')
+let cinturaInput = ref('')
+let caderaInput = ref('')
+
+let pesoPerdido = ref(0)
+let caderaPerdida = ref(0)
+let cinturaPerdida = ref(0)
+
+
+let listDatos = ref([{
 fecha: '10 de junio de 2023',
 peso: 80,
 cintura: 78,
 cadera: 86,
-},
-{
-fecha: '12 de julio de 2023',
-peso: 78,
-cintura: 76,
-cadera: 84, 
-},
-{
-fecha: '9 de agosto de 2023',
-peso: 76,
-cintura: 74,
-cadera: 82,   
-  
-}]
+}])
+
+function addDates() {
+  if (fechaInput.value.trim() === '') {
+    return {};
+  } else {
+    listDatos.value.push({
+      fecha: fechaInput.value,
+      peso: parseInt(pesoInput.value), 
+      cintura: parseInt(cinturaInput.value), 
+      cadera: parseInt(caderaInput.value) 
+    });
+
+    const ultimoDato = listDatos.value[listDatos.value.length - 1];
+
+    if (listDatos.value.length > 1) {
+      calculosPro(ultimoDato);
+    }
+
+ 
+  }
+}
+
+
+
+
+
+function calculosPro(ultimoDato) {
+  const penultimoDato = listDatos.value[listDatos.value.length - 2];
+
+  if (penultimoDato.peso >= ultimoDato.peso) {
+    pesoPerdido.value = penultimoDato.peso - ultimoDato.peso;
+  }
+
+  if (penultimoDato.cintura >= ultimoDato.cintura) {
+    cinturaPerdida.value = penultimoDato.cintura - ultimoDato.cintura;
+  }
+
+  if (penultimoDato.cadera >= ultimoDato.cadera) {
+    caderaPerdida.value = penultimoDato.cadera - ultimoDato.cadera;
+  }
+
+  console.log("pesoPer " + pesoPerdido.value);
+  console.log("Cadera " + caderaPerdida.value);
+  console.log("CinturaP " + cinturaPerdida.value);
+}
+
+
+
 
 </script>
 
 <template>
-  <div class="bg-green-300 w-44 mb-3 ml-4">
+  <!-- <div class="bg-green-300 w-44 mb-3 ml-4">
     <ul>
         <li>10 de junio de 2023</li>
         <li>Peso: 80kg</li>
@@ -45,18 +94,35 @@ cadera: 82,
         <li>Cintura: 74cm</li>
         <li>Cadera: 82cm</li>
     </ul>
+  </div> -->
+
+  <div v-for="(date,index) in listDatos" :key="index"
+  class="bg-green-300 w-56 mb-3 ml-4">
+    <ul> {{date.fecha }}</ul>
+    <ul> Peso: {{ date.peso }}</ul>
+    <ul>Cintura: {{ date.cintura }}</ul>
+    <ul>Cadera: {{ date.cadera }}</ul>
   </div>
+
+
+
+
+  <div>
+    Peso perdido: {{ pesoPerdido }} | Reducción Cintura: {{ cinturaPerdida }} | Reducción cadera: {{ caderaPerdida }}
+  </div>
+
 
   <div class="bg-green-300 w-56 h-60 ml-4 text-center">
     
-    <input class="mt-2 mb-2 border-2"type="text">
-    <input class="mb-2 border-2"type="text">
-    <input class="mb-2 border-2"type="text">
-    <input class="mb-2 border-2"type="text">
-    <a class="border-2-black bg-white" href="">Añadir</a>
-    
-    
+    <input v-model="fechaInput" class="mt-2 mb-2 border-2  "type="text" placeholder="Fecha">
+    <input v-model="pesoInput" class="mb-2 border-2"type="text" placeholder="Peso">
+    <input v-model="cinturaInput" class="mb-2 border-2"type="text" placeholder="Talla Cintura">
+    <input v-model="caderaInput" class="mb-2 border-2"type="text" placeholder="Talla Cadera">
+    <button @click="addDates" class="border-2-black bg-white" >Añadir</button>
   </div>
+
+
+
   
 
 </template>
