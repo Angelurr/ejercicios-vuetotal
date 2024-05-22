@@ -1,3 +1,4 @@
+
 <!-- <script setup>
 
 let objeto = {
@@ -38,7 +39,9 @@ return total;
 <ul>
   <h1>LISTA PARQUEADERO</h1>
   <span v-for="(obj, index) in listParqueadero" :key="index">
-  <li>{{ general(obj.tiempo, obj.tipo) }}</li>
+  <li>{{ obj.tipo }}</li>
+  <li>{{ obj.tiempo }}</li>
+
   </span>
 </ul>
 

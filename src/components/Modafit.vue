@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 
 import { ref } from 'vue';
 
@@ -70,7 +70,21 @@ function calculosPro(ultimoDato) {
 
 </script>
 
-<template>
+<template> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!-- <div class="bg-green-300 w-44 mb-3 ml-4">
     <ul>
         <li>10 de junio de 2023</li>
@@ -96,7 +110,7 @@ function calculosPro(ultimoDato) {
     </ul>
   </div> -->
 
-  <div v-for="(date,index) in listDatos" :key="index"
+  <!-- <div v-for="(date,index) in listDatos" :key="index"
   class="bg-green-300 w-56 mb-3 ml-4">
     <ul> {{date.fecha }}</ul>
     <ul> Peso: {{ date.peso }}</ul>
@@ -125,4 +139,4 @@ function calculosPro(ultimoDato) {
 
   
 
-</template>
+</template> -->

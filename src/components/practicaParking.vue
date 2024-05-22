@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 
 let total = ref(0)
@@ -89,4 +89,4 @@ function cambiarEstiloCars(index){
         </div>
 
     </section>
-</template>
+</template> -->
